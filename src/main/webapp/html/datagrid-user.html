@@ -1,0 +1,227 @@
+<body>
+	<div id=datagrid-user></div>
+	
+	<!-- 增加form -->
+	<div id=datagrid-user-dialog class=easyui-dialog height=250 width=260
+		title=增加用户 closed=true closable=false modal=true>
+		<form id=datagrid-user-dialog-form>
+			<table>
+				<tr>
+					<td><br>
+					<td ><input style=display:none name=id ></td>
+				</tr>
+				<tr>
+					<td>用户名</td>
+					<td><input id=username name=username></td>
+				</tr>
+				<tr>
+					<td>昵称</td>
+					<td><input id=nickname name=nickname></td>
+				</tr>
+				<tr>
+					<td>密码</td>
+					<td><input type=password id=password name=password></td>
+				</tr>
+				<tr>
+					<td>生效时间</td>
+					<td><input id=effectDate class=easyui-datetimebox name=effectDate></td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<td>过期时间</td>
+					<td><input id=expiredDate class=easyui-datetimebox name=expiredDate></td>
+				</tr>
+				<tr>
+					<td><br></td>
+				</tr>
+				<tr align="center">
+					<td colspan="2"><div id=datagrid-user-dialog-form-ok
+							style="height: 30px; width: 50px;" class=easyui-linkbutton>确定</div>
+						&nbsp;&nbsp;
+						<div id=datagrid-user-dialog-form-cancel
+							style="height: 30px; width: 50px;" class=easyui-linkbutton>取消</div></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	
+
+
+
+	<!-- easyui dialog -->
+	<script type="text/javascript" src="js/custom/form/form-user.js"></script>
+
+
+	<!-- custom js -->
+	<script type="text/javascript">
+		$('#datagrid-user').datagrid({
+			toolbar : [ {
+				text : '增加用户',
+				iconCls : 'icon-add',
+				handler : function() {
+					$('#datagrid-user-dialog').dialog('open');
+					$('#datagrid-user-dialog-form table tr:eq(3)').show();
+					$('#datagrid-user-dialog-form-ok').unbind('click');
+					$('#datagrid-user-dialog-form-ok').click(function() {
+						$.ajax({
+							type : 'post',
+							url : 'user/addOne.do',
+							data : {
+								username : $('#username').val(),
+								nickname : $('#nickname').val(),
+								password : $('#password').val(),
+								effectDate : $('#effectDate').datetimebox('getValue'),
+								expiredDate : $('#expiredDate').datetimebox('getValue')
+							},
+							success : function() {
+								$('#datagrid-user-dialog').dialog('close');
+								$.messager.show({
+									title : '消息',
+									content : '操作成功',
+									closable : false
+								});
+								$('#datagrid-user').datagrid('reload');
+							}
+						});
+					});
+					$('#datagrid-user-dialog-form-cancel').unbind('click');
+					$('#datagrid-user-dialog-form-cancel').click(function() {
+						$('#datagrid-user-dialog').dialog('close');
+					});
+
+				}
+			}, {
+				text : '修改用户',
+				iconCls : 'icon-edit',
+				handler : function() {
+					var row=$('#datagrid-user').datagrid('getSelected');
+					if(row){
+						$('#datagrid-user-dialog-form table tr:eq(3)').hide();
+						$('#datagrid-user-dialog').dialog({
+							title:'修改用户',
+							closed:false
+						});
+						$('#datagrid-user-dialog-form').form('load',{
+							id:row.id,
+							username:row.username,
+							nickname:row.nickname,
+							effectDate:new Date(row.effectDate).toLocaleString(),
+							expiredDate:new Date(row.expiredDate).toLocaleString()
+						});
+						$('#datagrid-user-dialog-form-ok').unbind('click');
+						$('#datagrid-user-dialog-form-ok').click(function(){
+							$.ajax({
+								type:'post',
+								url:'user/editOne.do',
+								data:$('#datagrid-user-dialog-form').serialize(),
+								success:function(data){
+									$('#datagrid-user-dialog').dialog('close');
+									$.messager.show({
+										title : '消息',
+										content : '操作成功',
+										closable : false
+									});
+									$('#datagrid-user').datagrid('reload');
+								}
+							})
+						});
+						$('#datagrid-user-dialog-form-cancel').unbind('click');
+						$('#datagrid-user-dialog-form-cancel').click(function() {
+							$('#datagrid-user-dialog').dialog('close');
+						});
+					}
+				}
+			}, {
+				text : '删除用户',
+				iconCls : 'icon-remove',
+				handler : function() {
+					if($('#datagrid-user').datagrid('getSelected')){
+						$.messager.confirm('警告', '是否删除该用户？', function(r) {
+							if (r == true) {
+								$.ajax({
+									type : 'post',
+									url : 'user/deleteOne.do',
+									datatype : 'json',
+									data : { id : $('#datagrid-user').datagrid('getSelected').id },
+									success:function(){
+										$.messager.show({
+											title:'消息',
+											msg:'删除成功',
+											closable:false
+										});
+										$('#datagrid-user').datagrid('reload');
+									}
+								});
+							}
+						});
+					}
+				}
+
+			}, {
+				text : '查询用户',
+				iconCls : 'icon-search',
+				hanlder : function() {
+					console.log('查询用户');
+				}
+			} ],
+			url : "user/findAllByPage.do",
+			columns : [ [ {
+				title : '用户名',
+				field : 'username',
+				width : 100
+			}, {
+				title : '昵称',
+				field : 'nickname',
+				width : 100
+
+			}, {
+				title : '创建时间',
+				field : 'createDate',
+				width : 100,
+				formatter : function(data){
+					console.log(11);
+					if(data==null){
+						return data;
+					}else{
+						return new Date(data).toLocaleString();
+					}
+				}
+				
+			}, {
+				title : '生效时间',
+				field : 'effectDate',
+				width : 100,
+				formatter : function(data){
+					console.log(data);
+					if(data==null){
+						return data;
+					}else{
+						return new Date(data).toLocaleString();
+					}
+				}
+			}, {
+				title : '过期时间',
+				field : 'expiredDate',
+				width : 100,
+				formatter : function(data){
+					if(data==null){
+						return data;
+					}else{
+						return new Date(data).toLocaleString();
+					}
+				}
+			}, {
+				title : 'ID',
+				field : 'id',
+				hidden : true
+
+			} ] ],
+			idField : 'id',
+			fit : true,
+			fitColumns : true,
+			singleSelect : true,
+			pagination : true,
+			rownumbers : true
+		});
+	</script>
+</body>

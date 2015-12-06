@@ -1,0 +1,12 @@
+.html-board-welcome {
+	font-size: 40px;
+	text-shadow:gray;
+	font-weight:bolder;
+	color: #008080;
+	text-align: center;
+}
+
+.html-board-img {
+	height: 120px;
+	align: right;
+}

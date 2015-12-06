@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<!-- easyui link -->
+<link rel="stylesheet" href="js/jquery-easyui-1.4.3/themes/icon.css">
+<link rel="stylesheet"
+	href="js/jquery-easyui-1.4.3/themes/default/easyui.css">
+<link rel="stylesheet" href="js/jquery-easyui-1.4.3/themes/color.css">
+
+
+<link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.css">
+
+<!-- custom style -->
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/board.css">
+<link rel="stylesheet" href="css/module.css">
+
+
+<!-- easyui js -->
+<script type="text/javascript"
+	src="js/jquery-easyui-1.4.3/jquery.min.js"></script>
+<script type="text/javascript"
+	src="js/jquery-easyui-1.4.3/jquery.easyui.min.js"></script>
+<script type="text/javascript"
+	src="js/jquery-easyui-1.4.3/locale/easyui-lang-zh_CN.js"></script>
+
+
+<!-- custom js -->
+<script type="text/javascript" src="js/custom/module/module-user.js"></script>
+
+
+</head>
+<body>
+	<div class=easyui-layout fit=true>
+
+		<!-- 公告 -->
+		<div id=board region=north title=公告 height=180 collapsible=false>
+			<div class=html-board-welcome>
+				数 字 图 书 馆                                           <img class=html-board-img
+					src=/BMS/img/u=4044539916,2234372567&fm=21&gp=0.jpg>
+			</div>
+		</div>
+
+		<!-- 模块 -->
+		<div id=module region=west title=模块 width=130>
+			<div id=module_board class=html-module-div>公告栏</div>
+			<div id=module_user class=html-module-div>用户管理</div>
+			<div id=module_book class=html-module-div>图书管理</div>
+			<div id=module_permission class=html-module-div>权限设置</div>
+			<div id=module_log class=html-module-div>系统日志</div>
+		</div>
+
+		<!-- 内容 -->
+		<div region=center title=内容>
+			<div id=content class=easyui-tabs fit=true></div>
+		</div>
+</body>
+<script type="text/javascript">
+	$(function() {
+		$('#module_board').trigger('click');
+	});
+</script>
+</html>

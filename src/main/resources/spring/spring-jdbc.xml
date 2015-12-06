@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   					http://www.springframework.org/schema/util	http://www.springframework.org/schema/util/spring-util.xsd
+		   				http://www.springframework.org/schema/context	http://www.springframework.org/schema/context/spring-context.xsd
+		   				http://www.springframework.org/schema/mvc	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		   				http://www.springframework.org/schema/jdbc	http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+						http://www.springframework.org/schema/aop	http://www.springframework.org/schema/aop/spring-aop.xsd
+						">
+
+	<util:properties id="jdbc" location="classpath:jdbc.properties"></util:properties>
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="#{jdbc.driverClassName}"></property>
+		<property name="url" value="#{jdbc.url}"></property>
+		<property name="username" value="#{jdbc.username}"></property>
+		<property name="password" value="#{jdbc.password}"></property>
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="mapperLocations" value="classpath:com/wodog/it/dao/*.xml"></property>
+	</bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.wodog.it.dao"></property>
+	</bean>
+
+</beans>

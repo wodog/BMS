@@ -1,0 +1,31 @@
+<html>
+<head>
+<script type="text/javascript"
+	src="js/jquery-easyui-1.4.3/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#c').click(function(){
+	console.log($('form').serialize());
+			
+		});
+	/*
+		$.ajax({
+			url : 'localhost',
+			type : 'post',
+			data : 'a=1&b=3'
+
+		});
+	*/	
+	});
+</script>
+</head>
+<body>
+	<form>
+		<input name=a>aa</input> 
+		<input name=b>bb</input>
+		<input id=c type=button>
+	</form>
+	<div id=a style="height: 100; width: 100; background: red;"></div>
+	<div id=c style="height: 100; width: 100; background: black;"></div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Alert Messager - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+	
+	<script>
+	var i=0;
+		$(function(){
+		
+			
+			$.ajax(function(){
+				type:post
+			});
+		
+		
+			$('#ff').form({ 
+					ajax:true,
+				
+					onSubmit:function(param){
+						console.log(i++);
+					},
+				
+					success:function(data){
+						
+					}
+			});
+		});
+	</script>
+	
+</head>
+
+<body>
+	<form id="ff" method="post">
+    <div>
+        <label for="name">Name:</label>
+        <input class="easyui-validatebox" type="text" name="name" data-options="required:true" ></input>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input class="easyui-validatebox" type="text" name="email" data-options="validType:'email'" />
+    </div>
+    <input type="submit">
+</form>
+</body>
+</html>
