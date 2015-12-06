@@ -1,15 +1,23 @@
 ## 关于BMS(Book Manager System)
 
-BMS主要是使用了jquery-easyui框架搭建的图书管理系统
+一个简单的图书管理系统，给宝宝学习使用
 
-给宝宝学习使用
+## 技术栈
+
+- Jquery-EasyUI
+- Spring
+- Spring-MVC
+- Mybatis
+- Mybatis-Generator
 
 ## 如何安装项目
 
+直接 Ecplise -> import -> git 导入
+
+## 如何导入数据库
+
 ```bash
-$ git clone https://github.com/wodog/BMS.git
+mysql> create database bms default charset utf8;
+mysql> use bms;
+mysql> source ~/BMS/bms.sql;
 ```
-
-从github下载本项目到本地后
-
-使用 Ecplise -> import -> maven 导入

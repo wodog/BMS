@@ -1,3 +1,5 @@
+package com.wodog.it.main;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,12 +11,11 @@ import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.exception.XMLParserException;
 import org.mybatis.generator.internal.DefaultShellCallback;
 
-public class aa {
-
+public class Generator {
 	public static void main(String[] args) throws Exception {
 		List<String> warnings = new ArrayList<String>();
 		boolean overwrite = true;
-		File configFile = new File("E:\\workspace\\BMS\\src\\main\\resources\\generatorConfig.xml");
+		File configFile = new File(Generator.class.getResource("/").getPath() + "generatorConfig.xml");
 		ConfigurationParser cp = new ConfigurationParser(warnings);
 		Configuration config = cp.parseConfiguration(configFile);
 		DefaultShellCallback callback = new DefaultShellCallback(overwrite);
