@@ -1,8 +1,8 @@
-## ¹ØÓÚBMS(Book Manager System)
+## å…³äºBMS(Book Manager System)
 
-Ò»¸ö¼òµ¥µÄÍ¼Êé¹ÜÀíÏµÍ³£¬¸ø±¦±¦Ñ§Ï°Ê¹ÓÃ
+ä¸€ä¸ªç®€å•çš„å›¾ä¹¦ç®¡ç†ç³»ç»Ÿ
 
-## ¼¼ÊõÕ»
+## æŠ€æœ¯æ ˆ
 
 - Jquery-EasyUI
 - Spring
@@ -10,11 +10,11 @@
 - Mybatis
 - Mybatis-Generator
 
-## ÈçºÎ°²×°ÏîÄ¿
+## å¦‚ä½•å®‰è£…é¡¹ç›®
 
-Ö±½Ó Ecplise -> import -> git µ¼Èë
+ç›´æ¥ Ecplise -> import -> git å¯¼å…¥
 
-## ÈçºÎµ¼ÈëÊı¾İ¿â
+## å¦‚ä½•å¯¼å…¥æ•°æ®åº“
 
 ```bash
 mysql> create database bms default charset utf8;
